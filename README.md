@@ -2,11 +2,10 @@
 
 > My name is Bond, Agent Bond ...
 
-Agent Bond is a super agent, which can wraps and dispatchs on several
+Agent Bond is a super agent, which wraps and dispatches on several
 other agents. That way, you only have to install a single agent within
-you JVM with a single set of configuration data (which contains
-multiple parts). 
-
+your JVM with a single set of configuration data (which contains
+multiple separate parts). 
 
 Currently supported are the following agents:
 
