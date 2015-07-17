@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright 2015 Red Hat
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>agent-bond</artifactId>
+    <groupId>io.fabric8</groupId>
+    <relativePath>..</relativePath>
+    <version>0.0.1</version>
+  </parent>
+
+  <artifactId>agent-bond-agent</artifactId>
+  <packaging>jar</packaging>
+
+  <properties>
+    <test.agent.args>jmx_exporter{{9779:src/test/resources/jmx_exporter.json}}</test.agent.args>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>jolokia</id>
+
+      <dependencies>
+        <dependency>
+          <groupId>io.fabric8</groupId>
+          <artifactId>agent-bond-jolokia</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+      </dependencies>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <configuration>
+              <artifactSet>
+                <includes combine.children="append">
+                  <include>io.fabric8:agent-bond-jolokia</include>
+                </includes>
+              </artifactSet>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <activation><activeByDefault>true</activeByDefault></activation>
+    </profile>
+
+    <profile>
+      <id>jmx_exporter</id>
+
+      <dependencies>
+        <dependency>
+          <groupId>io.fabric8</groupId>
+          <artifactId>agent-bond-jmx_exporter</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+      </dependencies>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <configuration>
+              <artifactSet>
+                <includes combine.children="append">
+                  <include>io.fabric8:agent-bond-jmx_exporter</include>
+                </includes>
+              </artifactSet>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+
+      <activation><activeByDefault>true</activeByDefault></activation>
+    </profile>
+  </profiles>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <configuration>
+          <artifactSet>
+            <includes>
+              <include>io.fabric8:agent-bond-core</include>
+              <include>io.fabric8:agent-bond-agent</include>
+            </includes>
+          </artifactSet>
+          <transformers>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+              <manifestEntries>
+                <Premain-Class>io.fabric8.bond.agent.AgentBondDispatcher</Premain-Class>
+                <Agent-Class>io.fabric8.bond.agent.AgentBondDispatcher</Agent-Class>
+                <Can-Redefine-Classes>false</Can-Redefine-Classes>
+                <Can-Retransform-Classes>false</Can-Retransform-Classes>
+                <Can-Set-Native-Method-Prefix>false</Can-Set-Native-Method-Prefix>
+              </manifestEntries>
+            </transformer>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+          </transformers>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.4.0</version>
+        <configuration>
+          <executable>java</executable>
+          <arguments>
+            <argument>-javaagent:target/${project.artifactId}-${project.version}.jar=${test.agent.args}</argument>
+            <argument>-classpath</argument>
+            <argument>target/test-classes</argument>
+            <argument>io.fabric8.bond.agent.WaitForever</argument>
+          </arguments>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <!--  Core -->
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>agent-bond-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+  </dependencies>
+</project>
