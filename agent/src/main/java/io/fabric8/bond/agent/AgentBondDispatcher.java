@@ -52,7 +52,9 @@ public class AgentBondDispatcher {
         // Call all premains ...
         for (AgentDescriptor agent : agents) {
             String args = config.getArgs(agent.getId());
-            callPremain(agent.getId(), agent.getPremainClass(), args, instrumentation);
+            if (args != null) {
+                callPremain(agent.getId(), agent.getPremainClass(), args, instrumentation);
+            }
         }
     }
 
@@ -61,7 +63,7 @@ public class AgentBondDispatcher {
         try {
             try {
                 method = premainClass.getMethod("premain", String.class, Instrumentation.class);
-                method.invoke(null,args != null ? args : "",instrumentation);
+                method.invoke(null,args,instrumentation);
             } catch (NoSuchMethodException e) {
                 try {
                     method = premainClass.getMethod("premain", String.class);

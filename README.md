@@ -16,19 +16,24 @@ exporting JMX in an Prometheus understandable format
 ### Usage
 
 ```
-java -javaagent=agent-bond.jar=jolokia{{port=8778,host=0.0.0.0}},jmx_exporter{{9779:config.json}}
+java -javaagent=agent-bond.jar=jolokia{{port=8778}},jmx_exporter{{9779:config.json}}
 ```
 
-The argument passed to the agent as the general format: *agent1 type*`{{`*agent options*`}},`*agent2 type*`{{`*options`}},` *...* 
+The argument passed to the agent as the general format: 
 
-The possible agent types are:
+```
+agent1_type{{ options }}, agent2_type{{ options }}, ... 
+```
 
-* **jolokia** : Options for the Jolokia JVM agents as they are specified in the [reference manual](https://jolokia.org/reference/html/agents.html#jvm-agent). 
+Only agents referenced are enabled. The possible agent types are:
+
+* **jolokia** : Options for the Jolokia JVM agents as they are specified in the 
+  [reference manual](https://jolokia.org/reference/html/agents.html#jvm-agent). 
   The configuration for Jolokia can be omitted, it will take then the default values
-* **jmx_exporter** : Options for [jmx_exporter](https://github.com/prometheus/jmx_exporter) which are mandatory. You need the port and the path to the 
-  configuration file like in `jmx_exporter{{9779,config.json}}` 
+* **jmx_exporter** : Options for [jmx_exporter](https://github.com/prometheus/jmx_exporter) which are mandatory. 
+  You need the port and the path to the configuration file like in `jmx_exporter{{9779,config.json}}` 
  
-Algernatively instead of providing the configuration on the command line you can also specify the path to 
+Alternatively instead of providing the configuration on the command line you can also specify the path to 
 a property file like in `-javaagent:agent-bond.jar=agent.properties` where the properties hold the configuration
 line by line:
 
@@ -36,6 +41,9 @@ line by line:
 jolokia=port=8778,host=0.0.0.0
 jmx_exporter=9779,config.json
 ```
+
+If both, a property file and specific agent configuration is provided on the command line, then the configuration 
+on the command line overwrites the one in the configuration.
 
 ### Limitations
 

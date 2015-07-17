@@ -54,6 +54,7 @@ public class AgentConfigurationTest {
         String[] data = new String[] {
                 p,"port=8577","9999:other.json",
                 p + ",jmx_exporter{{567:config.json}}","port=8577","567:config.json",
+                "jmx_exporter{{567:config.json}}," + p,"port=8577","567:config.json",
                 "jolokia{{port=1234,host=localhost}},jmx_exporter{{567:config.json}}","port=1234,host=localhost","567:config.json",
                 "jolokia{{port=1234,host=localhost}}", "port=1234,host=localhost", null,
         };

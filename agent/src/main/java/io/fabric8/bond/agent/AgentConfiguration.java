@@ -29,8 +29,10 @@ import java.util.regex.Pattern;
  */
 public class AgentConfiguration {
 
+    // parsed arguments
     private Properties arguments;
 
+    // specific agent config given on the command line
     private HashMap<Object, Object> agentCliArgs;
 
     public AgentConfiguration(Set<String> agents, String args) {
@@ -44,6 +46,7 @@ public class AgentConfiguration {
         arguments.putAll(agentCliArgs);
     }
 
+    // The rest are configuration files
     private String extractPropertyFile(String remaining) {
         StringTokenizer tok = new StringTokenizer(remaining,",");
         List<String> propFiles = new ArrayList<>();
@@ -59,6 +62,7 @@ public class AgentConfiguration {
         }
     }
 
+    // load from file
     private Properties loadProperties(String propFile) {
         Properties ret = new Properties();
         Properties prop = extractProperties(propFile);
