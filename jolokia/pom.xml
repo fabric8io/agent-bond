@@ -23,12 +23,12 @@
   <parent>
     <groupId>io.fabric8</groupId>
     <artifactId>agent-bond</artifactId>
-    <version>0.0.1</version>
+    <version>0.1.0-SNASPHOT</version>
     <relativePath>..</relativePath>
   </parent>
 
   <artifactId>agent-bond-jolokia</artifactId>
-  <version>0.0.1</version>
+  <version>0.1.0-SNAPSHOT</version>
 
   <dependencies>
     <dependency>
