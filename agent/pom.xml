@@ -24,7 +24,6 @@
   <parent>
     <artifactId>agent-bond</artifactId>
     <groupId>io.fabric8</groupId>
-    <relativePath>..</relativePath>
     <version>0.1.0-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
