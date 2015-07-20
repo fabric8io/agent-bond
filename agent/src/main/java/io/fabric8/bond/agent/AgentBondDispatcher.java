@@ -76,4 +76,13 @@ public class AgentBondDispatcher {
             throw new RuntimeException(agentId + ": Cannot initialize with arguments = " + args);
         }
     }
+
+    // =======================================================================================
+
+    public static void main(String[] args) {
+        System.out.println(
+                "Usage: \n" +
+                "java -javaagent:agent-bond.jar=/path/to/configfile\n" +
+                "java -javaagent:agent-bond.jar=<agent-type1>{{ ... opts ...}},<agent-type2>{{ ... opts ...}},...\n");
+    }
 }

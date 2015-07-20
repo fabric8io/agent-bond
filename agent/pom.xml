@@ -113,6 +113,7 @@
               <manifestEntries>
                 <Premain-Class>io.fabric8.bond.agent.AgentBondDispatcher</Premain-Class>
                 <Agent-Class>io.fabric8.bond.agent.AgentBondDispatcher</Agent-Class>
+                <Main-Class>io.fabric8.bond.agent.AgentBondDispatcher</Main-Class>
                 <Can-Redefine-Classes>false</Can-Redefine-Classes>
                 <Can-Retransform-Classes>false</Can-Retransform-Classes>
                 <Can-Set-Native-Method-Prefix>false</Can-Set-Native-Method-Prefix>
