@@ -20,9 +20,9 @@
   <packaging>pom</packaging>
 
   <parent>
-      <groupId>org.sonatype.oss</groupId>
-      <artifactId>oss-parent</artifactId>
-      <version>9</version>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>9</version>
   </parent>
 
   <groupId>io.fabric8</groupId>
