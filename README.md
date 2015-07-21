@@ -1,6 +1,6 @@
 ## Agent Bond
 
-> My name is Bond, Agent Bond ...
+> My name's Bond, Agent Bond ...
 
 Agent Bond is a super agent, which wraps and dispatches on several
 other agents. That way, you only have to install a single agent within
@@ -49,5 +49,6 @@ on the command line overwrites the one in the configuration.
 
 * No way to switch off an agent now. Will be added soon.
 * Currently the agent might not contain dependencies with different versions since 
-  they are ll packed into the same classloader. Depending on the build order the latter 
-  agent will override already existing class files within the agent.
+  they are all packed into the same classloader. Depending on the build order the latter 
+  agent will override already existing class files within the agent. One might consider also to 
+  relocate classes if needed. 
