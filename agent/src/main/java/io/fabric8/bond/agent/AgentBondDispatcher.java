@@ -73,7 +73,7 @@ public class AgentBondDispatcher {
                 }
             }
         } catch (InvocationTargetException | IllegalAccessException e) {
-            throw new RuntimeException(agentId + ": Cannot initialize with arguments = " + args);
+            throw new RuntimeException(agentId + ": Cannot initialize with arguments = " + args + ": " + e,e);
         }
     }
 

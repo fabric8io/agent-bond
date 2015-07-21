@@ -1,6 +1,6 @@
 FROM centos
 
-ENV AGENT_BOND_VERSION 0.0.1
+ENV AGENT_BOND_VERSION 0.1.0
 
 # telnet is required by some fabric command. without it you have silent failures
 RUN yum install -y java-1.7.0-openjdk java-1.7.0-openjdk-devel which telnet unzip openssh-server sudo openssh-clients
@@ -18,13 +18,13 @@ RUN echo "alias ll='ls -l --color=auto'" >> /etc/profile
 RUN echo "alias grep='grep --color=auto'" >> /etc/profile
 
 # Add environment setup script
-ADD agent_bond_opts /bin/
-
+ADD agent-bond-opts /bin/
 # Helper programs & download
-RUN chmod 755 /bin/agent_bond_opts \
- && mkdir /opt/agent-bond \
- && wget http://central.maven.org/maven2/io/fabric8/agent-bond/${AGENT_BOND_VERSION}/agent-bond-${AGENT_BOND_VERSION}-agent.jar \
- &&      -O /opt/agent-bond/agent-bond.jar
+RUN chmod 755 /bin/agent-bond-opts \
+ && mkdir /opt/agent-bond 
+
+ADD jmx_exporter_config.json /opt/agent-bond/
+ADD http://central.maven.org/maven2/io/fabric8/agent-bond-agent/${AGENT_BOND_VERSION}/agent-bond-agent-${AGENT_BOND_VERSION}.jar /opt/agent-bond/agent-bond.jar
 
 # Default ports exposed
 EXPOSE 22 8080 8778 9779

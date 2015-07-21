@@ -1,12 +1,13 @@
 ## Java Image Base image, including Agent Bond ...
 
 This image is based on CentOS and OpenJDK 1.7 image and 
-includes an agent-bond Agent with Jolokia and Prometheus' jmx_exporter. 
+includes an agent-bond Agent with [Jolokia](http://www.jolokia.org) 
+and Prometheus' [jmx_exporter](https://github.com/prometheus/jmx_exporter). 
 The agent is installed as `/opt/agent-bond/agent-bond.jar`. 
 
 In order to enable Jolokia for your application you should use this 
 image as a base image (via `FROM`) and use the output of `agent-bond-opts` in 
-your startup scripts to include it in your startup options. 
+your startup scripts to include it in for the Java startup options. 
 
 For example, the following snippet can be added to a script starting up your 
 Java application
@@ -15,12 +16,12 @@ Java application
     export JAVA_OPTIONS="$JAVA_OPTIONS $(agent-bond-opts)"
     # .... us JAVA_OPTIONS when starting your app, e.g. as Tomcat does
 
-You can influence the behaviour `agent-bond-opts` by setting various environment 
+You can influence the behaviour of `agent-bond-opts` by setting various environment 
 variables:
 
 * **AB_OFF** : If set disables activation of agent-bond (i.e. echos an empty value). By default, agent-bond is enabled.
-* **AB_ENABLED** : Comma separated list of sub-agents enabled. Currently allowed valuess `jolokia` and `jmx_exporter`. 
-  By default both are enabled
+* **AB_ENABLED** : Comma separated list of sub-agents enabled. Currently allowed values are `jolokia` and `jmx_exporter`. 
+  By default both are enabled.
 
 So, if you start the container with `docker run -e AB_OFF ...` no agent will be launched.
 
