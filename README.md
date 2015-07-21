@@ -7,7 +7,7 @@ other agents. That way, you only have to install a single agent within
 your JVM with a single set of configuration data (which contains
 multiple separate parts). 
 
-Currently supported are the following agents:
+The following agents are currently supported:
 
 * [Jolokia](https://github.com/rhuss/jolokia) - JMX-over-HTTP bridge
 * [jmx_exporter](https://github.com/prometheus/jmx_exporter) - Agent
@@ -19,7 +19,7 @@ exporting JMX in an Prometheus understandable format
 java -javaagent=agent-bond.jar=jolokia{{port=8778}},jmx_exporter{{9779:config.json}}
 ```
 
-The argument passed to the agent as the general format: 
+The argument passed to the agent has the general format: 
 
 ```
 agent1_type{{ options }}, agent2_type{{ options }}, ... 
