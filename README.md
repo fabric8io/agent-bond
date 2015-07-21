@@ -45,10 +45,12 @@ jmx_exporter=9779,config.json
 If both, a property file and specific agent configuration is provided on the command line, then the configuration 
 on the command line overwrites the one in the configuration.
 
-### Limitations
+An agent is only enabled when it is mentioned in the configuration, even with an empty agent configuration 
+(like `jolokia{{}}`)
 
-* No way to switch off an agent now. Will be added soon.
-* Currently the agent might not contain dependencies with different versions since 
-  they are all packed into the same classloader. Depending on the build order the latter 
-  agent will override already existing class files within the agent. One might consider also to 
-  relocate classes if needed. 
+### Docker Base Image
+ 
+There is also a Docker base image available: [fabric8/java-agent-bond](https://registry.hub.docker.com/u/fabric8/java-agent-bond/)
+
+You can use this to easily enable `Jolokia` and/or `jmx_exporter` for your Java applications. Some sample usage for 
+[Tomcat](docker/tomcat) and [Wildfly](docker/wildfly) are included.
