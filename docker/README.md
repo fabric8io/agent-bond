@@ -27,8 +27,8 @@ So, if you start the container with `docker run -e AB_OFF ...` no agent will be 
 
 The following versions and defaults are used:
 
-* Jolokia: version **1.3.1** and port **8778**
-* jmx_exporter: version **0.3-SNAPSHOT** and port **9779**  
+* [Jolokia](http://www.jolokia.org) : version **1.3.1** and port **8778**
+* [jmx_exporter](https://github.com/prometheus/jmx_exporter): version **0.3-SNAPSHOT** and port **9779**  
 
 ### Jolokia configuration
 
