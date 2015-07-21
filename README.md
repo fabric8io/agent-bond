@@ -10,8 +10,7 @@ multiple separate parts).
 The following agents are currently supported:
 
 * [Jolokia](https://github.com/rhuss/jolokia) - JMX-over-HTTP bridge
-* [jmx_exporter](https://github.com/prometheus/jmx_exporter) - Agent
-exporting JMX in an Prometheus understandable format
+* [jmx_exporter](https://github.com/prometheus/jmx_exporter) - [Prometheus'](http://prometheus.io/) JMX Agent
 
 ### Usage
 
