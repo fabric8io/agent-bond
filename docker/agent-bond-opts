@@ -9,11 +9,11 @@ if [ -z ${AB_OFF+x} ]; then
       opts="${opts}${sep}${AB_CONFIG}"
       sep=","
    fi
-   if [ -z ${AB_ENABLED+x} -o ${AB_ENABLED} -eq ${AB_ENABLED#jolokia} ]; then
+   if [[ -z ${AB_ENABLED+x} || ${AB_ENABLED} != ${AB_ENABLED/jolokia/} ]]; then
      # Direct options only if no configuration is found
      jsep=""
      jolokia_opts=""
-     if [ -n "$AB_JOLOKIA_CONFIG" && -f "$AB_JOLOKIA_CONFIG" ]; then
+     if [[ -n "$AB_JOLOKIA_CONFIG" && -f "$AB_JOLOKIA_CONFIG" ]]; then
         jolokia_opts="${jolokia_opts}${jsep}config=${AB_JOLOKIA_CONFIG}"
         jsep=","
      fi
@@ -36,26 +36,26 @@ if [ -z ${AB_OFF+x} ]; then
      fi
       # Add extra opts to the end
      if [ -n "$AB_JOLOKIA_OPTS" ]; then
-        jolokia_opts="${jolkia_opts}${jsep}${AB_JOLOKIA_OPTS}"
+        jolokia_opts="${jolokia_opts}${jsep}${AB_JOLOKIA_OPTS}"
         jsep=","
      fi
-     opts="${opts}${sep}jolokia{{${jolokia_opts}}"
+     opts="${opts}${sep}jolokia{{${jolokia_opts}}}"
      sep=","
    fi
-   if [ -z ${AB_ENABLED+x} -o ${AB_ENABLED} -eq ${AB_ENABLED#jmx_exporter} ]; then
+   if [[ -z ${AB_ENABLED+x} || ${AB_ENABLED} != ${AB_ENABLED/jmx_exporter/} ]]; then
      je_opts=""
      jsep=""
      if [ -n "$AB_JMX_EXPORTER_OPTS" ]; then
-        opts="${opts}{$sep}jmx_exporter{{${AB_JMX_EXPORTER_OPTS}}"
+        opts="${opts}${sep}jmx_exporter{{${AB_JMX_EXPORTER_OPTS}}"
         sep=","
      else
-        port = ${AB_JMX_EXPORTER_PORT-9777}
-        config = ${AB_JMX_EXPORTER_CONFIG-/opt/agent-bond/jmx_exporter_config.json}
-        opts="${opts}{$sep}jmx_exporter{{${port}:${config}}}"
+        port=${AB_JMX_EXPORTER_PORT-9779}
+        config=${AB_JMX_EXPORTER_CONFIG-/opt/agent-bond/jmx_exporter_config.json}
+        opts="${opts}${sep}jmx_exporter{{${port}:${config}}}"
         sep=","
      fi
    fi
-   if [ "x$sep" -ne 'x=' ] ; then
+   if [ "x$sep" != 'x=' ] ; then
      echo ${opts}
    fi
 fi
