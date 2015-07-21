@@ -1,7 +1,7 @@
 ## Java base image, including Agent Bond ...
 
 This image is based on CentOS and OpenJDK 1.7 image and 
-includes an agent-bond Agent with [Jolokia](http://www.jolokia.org) 
+includes an [Agent Bond](https://github.com/fabric8io/agent-bond) Agent with [Jolokia](http://www.jolokia.org) 
 and Prometheus' [jmx_exporter](https://github.com/prometheus/jmx_exporter). 
 The agent is installed as `/opt/agent-bond/agent-bond.jar`. 
 
