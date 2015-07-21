@@ -25,6 +25,7 @@ RUN chmod 755 /bin/agent-bond-opts \
 
 ADD jmx_exporter_config.json /opt/agent-bond/
 ADD http://central.maven.org/maven2/io/fabric8/agent-bond-agent/${AGENT_BOND_VERSION}/agent-bond-agent-${AGENT_BOND_VERSION}.jar /opt/agent-bond/agent-bond.jar
+RUN chmod 444 /opt/agent-bond/agent-bond.jar
 
 # Default ports exposed
 EXPOSE 22 8080 8778 9779
