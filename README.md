@@ -1,6 +1,6 @@
 ## Agent Bond
 
-> My name's Bond, Agent Bond ...
+> The name's Bond, Agent Bond ...
 
 Agent Bond is a super agent, which wraps and dispatches on several
 other agents. That way, you only have to install a single agent within
