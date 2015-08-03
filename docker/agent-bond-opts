@@ -9,16 +9,16 @@ if [ -z ${AB_OFF+x} ]; then
       opts="${opts}${sep}${AB_CONFIG}"
       sep=","
    fi
-   if [[ -z ${AB_ENABLED+x} || ${AB_ENABLED} != ${AB_ENABLED/jolokia/} ]]; then
+   if [ -z ${AB_ENABLED+x} ] || [ x${AB_ENABLED} != x${AB_ENABLED/jolokia/} ]; then
      # Direct options only if no configuration is found
      jsep=""
      jolokia_opts=""
-     if [[ -n "${AB_JOLOKIA_CONFIG}" && -f "${AB_JOLOKIA_CONFIG}" ]]; then
+     if [ -n "${AB_JOLOKIA_CONFIG}" ] && [ -f "${AB_JOLOKIA_CONFIG}" ]; then
         jolokia_opts="${jolokia_opts}${jsep}config=${AB_JOLOKIA_CONFIG}"
         jsep=","
         grep -q -e '^host' ${AB_JOLOKIA_CONFIG} && host_in_config=1
      fi
-     if [[ -z ${AB_JOLOKIA_HOST+x} && -z ${host_in_config+x} ]]; then
+     if [ -z ${AB_JOLOKIA_HOST+x} ] && [ -z ${host_in_config+x} ]; then
         AB_JOLOKIA_HOST='0.0.0.0'
      fi
      if [ -n "$AB_JOLOKIA_HOST" ]; then
@@ -50,11 +50,11 @@ if [ -z ${AB_OFF+x} ]; then
      opts="${opts}${sep}jolokia{{${jolokia_opts}}}"
      sep=","
    fi
-   if [[ -z ${AB_ENABLED+x} || ${AB_ENABLED} != ${AB_ENABLED/jmx_exporter/} ]]; then
+   if [ -z ${AB_ENABLED+x} ] || [ x${AB_ENABLED} != x${AB_ENABLED/jmx_exporter/} ]; then
      je_opts=""
      jsep=""
      if [ -n "$AB_JMX_EXPORTER_OPTS" ]; then
-        opts="${opts}${sep}jmx_exporter{{${AB_JMX_EXPORTER_OPTS}}"
+        opts="${opts}${sep}jmx_exporter{{${AB_JMX_EXPORTER_OPTS}}}"
         sep=","
      else
         port=${AB_JMX_EXPORTER_PORT-9779}
