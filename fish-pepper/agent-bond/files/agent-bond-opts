@@ -1,6 +1,9 @@
 #!/bin/sh
 dir=${AB_DIR:-/opt/agent-bond}
 sep="="
+# Options separators defined to avoid clash with fish-pepper templating
+_AB_OPEN="{""{"
+_AB_CLOSE="}""}"
 if [ -z ${AB_OFF+x} ]; then
    opts="-javaagent:$dir/agent-bond.jar"
    config=${AB_CONFIG:-$dir/agent-bond.properties}
@@ -47,19 +50,19 @@ if [ -z ${AB_OFF+x} ]; then
         jolokia_opts="${jolokia_opts}${jsep}${AB_JOLOKIA_OPTS}"
         jsep=","
      fi
-     opts="${opts}${sep}jolokia{{${jolokia_opts}}}"
+     opts="${opts}${sep}jolokia${_AB_OPEN}${jolokia_opts}${_AB_CLOSE}"
      sep=","
    fi
    if [ -z ${AB_ENABLED+x} ] || [ x${AB_ENABLED} != x${AB_ENABLED/jmx_exporter/} ]; then
      je_opts=""
      jsep=""
      if [ -n "$AB_JMX_EXPORTER_OPTS" ]; then
-        opts="${opts}${sep}jmx_exporter{{${AB_JMX_EXPORTER_OPTS}}}"
+        opts="${opts}${sep}jmx_exporter${_AB_OPEN}${AB_JMX_EXPORTER_OPTS}${_AB_CLOSE}"
         sep=","
      else
         port=${AB_JMX_EXPORTER_PORT-9779}
         config=${AB_JMX_EXPORTER_CONFIG-/opt/agent-bond/jmx_exporter_config.json}
-        opts="${opts}${sep}jmx_exporter{{${port}:${config}}}"
+        opts="${opts}${sep}jmx_exporter${_AB_OPEN}${port}:${config}${_AB_CLOSE}"
         sep=","
      fi
    fi
