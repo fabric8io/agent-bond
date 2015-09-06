@@ -1,9 +1,29 @@
 #!/bin/sh
+
+# Parse options
+while [[ $# > 0 ]]
+do
+key="$1"
+case ${key} in
+    # Escape for scripts which eval the output of this script
+    -e|--escape)
+    escape_sep=1
+    ;;
+esac
+shift
+done
+
 dir=${AB_DIR:-/opt/agent-bond}
 sep="="
+
 # Options separators defined to avoid clash with fish-pepper templating
-_AB_OPEN="{""{"
-_AB_CLOSE="}""}"
+ab_open_del="{""{"
+ab_close_del="}""}"
+if [ x$escape_sep != x ]; then
+  ab_open_del='\\{\\{'
+  ab_close_del='\\}\\}'
+fi
+
 if [ -z ${AB_OFF+x} ]; then
    opts="-javaagent:$dir/agent-bond.jar"
    config=${AB_CONFIG:-$dir/agent-bond.properties}
@@ -50,19 +70,19 @@ if [ -z ${AB_OFF+x} ]; then
         jolokia_opts="${jolokia_opts}${jsep}${AB_JOLOKIA_OPTS}"
         jsep=","
      fi
-     opts="${opts}${sep}jolokia${_AB_OPEN}${jolokia_opts}${_AB_CLOSE}"
+     opts="${opts}${sep}jolokia${ab_open_del}${jolokia_opts}${ab_close_del}"
      sep=","
    fi
    if [ -z ${AB_ENABLED+x} ] || [ x${AB_ENABLED} != x${AB_ENABLED/jmx_exporter/} ]; then
      je_opts=""
      jsep=""
      if [ -n "$AB_JMX_EXPORTER_OPTS" ]; then
-        opts="${opts}${sep}jmx_exporter${_AB_OPEN}${AB_JMX_EXPORTER_OPTS}${_AB_CLOSE}"
+        opts="${opts}${sep}jmx_exporter${ab_open_del}${AB_JMX_EXPORTER_OPTS}${ab_close_del}"
         sep=","
      else
         port=${AB_JMX_EXPORTER_PORT-9779}
         config=${AB_JMX_EXPORTER_CONFIG-/opt/agent-bond/jmx_exporter_config.json}
-        opts="${opts}${sep}jmx_exporter${_AB_OPEN}${port}:${config}${_AB_CLOSE}"
+        opts="${opts}${sep}jmx_exporter${ab_open_del}${port}:${config}${ab_close_del}"
         sep=","
      fi
    fi
