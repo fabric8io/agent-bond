@@ -20,8 +20,8 @@ sep="="
 ab_open_del="{""{"
 ab_close_del="}""}"
 if [ x$escape_sep != x ]; then
-  ab_open_del='\\{\\{'
-  ab_close_del='\\}\\}'
+  ab_open_del='\{\{'
+  ab_close_del='\}\}'
 fi
 
 if [ -z ${AB_OFF+x} ]; then
