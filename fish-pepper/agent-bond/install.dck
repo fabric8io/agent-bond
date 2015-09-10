@@ -1,9 +1,11 @@
-# Agent bond
-ADD agent-bond-opts /bin/
+{{
+  var destPath = fp.blockOpts.dest || "/bin/agent-bond-options";
+}}# Agent bond
+ADD agent-bond-opts {{= destPath }}
 RUN mkdir -p /opt/agent-bond \
  && curl http://central.maven.org/maven2/io/fabric8/agent-bond-agent/{{= fp.version.agentBond }}/agent-bond-agent-{{= fp.version.agentBond }}.jar \
           -o /opt/agent-bond/agent-bond.jar \
  && chmod 444 /opt/agent-bond/agent-bond.jar \
- && chmod 755 /bin/agent-bond-opts
+ && chmod 755 {{= destPath}}
 ADD jmx_exporter_config.json /opt/agent-bond/
 EXPOSE 8778 9779
