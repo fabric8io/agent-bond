@@ -9,4 +9,4 @@ RUN mkdir -p /opt/agent-bond \
  && chmod 755 {{= destPath}}
 ADD jmx_exporter_config.json /opt/agent-bond/
 EXPOSE 8778 9779
-{{? fp.blocksOpts.openshift }}LABEL io.openshift.expose-services 8778/tcp:jolokia,9779:jmx_exporter{{?}}
+{{? fp.blockOpts.openshift }}LABEL io.openshift.expose-services 8778/tcp:jolokia,9779:jmx_exporter{{?}}
