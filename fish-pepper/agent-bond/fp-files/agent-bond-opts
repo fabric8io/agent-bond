@@ -62,7 +62,7 @@ if [ -z ${AB_OFF+x} ]; then
      fi
      # Integration of 3rd party environments
      if [ -n "$AB_JOLOKIA_AUTH_OPENSHIFT" ]; then
-        jolokia_opts="${jolokia_opts}${jsep}authMode=delegate,authUrl=${AB_JOLOKIA_AUTH_OPENSHIFT%/}/users/~,authPrincipalSpec=json:metadata/user,authIgnoreCerts=true"
+        jolokia_opts="${jolokia_opts}${jsep}authMode=delegate,authUrl=${AB_JOLOKIA_AUTH_OPENSHIFT%/}/users/~,authPrincipalSpec=json:metadata/user,authIgnoreCerts=true,authFallbackHeader=X-Authorization"
         jsep=","
      fi
       # Add extra opts to the end
