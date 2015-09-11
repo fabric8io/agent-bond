@@ -1,6 +1,6 @@
 {{
   var destPath = fp.blockOpts.dest || "/bin/agent-bond-options";
-}}# Agent bond
+}}# Agent bond including Jolokia and jmx_exporter
 ADD agent-bond-opts {{= destPath }}
 RUN mkdir -p /opt/agent-bond \
  && curl http://central.maven.org/maven2/io/fabric8/agent-bond-agent/{{= fp.version.agentBond }}/agent-bond-agent-{{= fp.version.agentBond }}.jar \
@@ -9,3 +9,4 @@ RUN mkdir -p /opt/agent-bond \
  && chmod 755 {{= destPath}}
 ADD jmx_exporter_config.json /opt/agent-bond/
 EXPOSE 8778 9779
+{{? fp.blocksOpts.openshift }}LABEL io.openshift.expose-services 8778/tcp:jolokia,9779:jmx_exporter{{?}}
