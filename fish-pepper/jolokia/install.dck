@@ -1,9 +1,10 @@
 {{
   var destPath = fp.blockOpts.dest || "/bin/jolokia-options";
+  var jolokiaVersion = fp.version.jolokia || "1.3.1";
 }}# Jolokia agent
 ADD jolokia-opts {{= destPath }}
 RUN mkdir -p /opt/jolokia \
- && curl http://central.maven.org/maven2/org/jolokia/jolokia-jvm/{{= fp.version.jolokia }}/jolokia-jvm-${fp.version.jolokia}-agent.jar \
+ && curl http://central.maven.org/maven2/org/jolokia/jolokia-jvm/{{= jolokiaVersion }}/jolokia-jvm-{{= jolokiaVersion }}-agent.jar \
          -o /opt/jolokia/jolokia.jar \
  && chmod 444 /opt/jolokia/jolokia.jar \
  && chmod 755 {{= destPath}}
