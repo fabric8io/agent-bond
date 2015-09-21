@@ -1,6 +1,7 @@
 #!/bin/sh
 
 dir=${AB_JOLOKIA_DIR:-/opt/jolokia}
+sep="="
 
 if [ -z ${AB_JOLOKIA_OFF+x} ]; then
    opts="-javaagent:$dir/jolokia.jar"
