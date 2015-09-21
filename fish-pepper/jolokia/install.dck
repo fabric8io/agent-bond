@@ -1,0 +1,11 @@
+{{
+  var destPath = fp.blockOpts.dest || "/bin/jolokia-options";
+}}# Jolokia agent
+ADD jolokia-opts {{= destPath }}
+RUN mkdir -p /opt/jolokia \
+ && curl http://central.maven.org/maven2/org/jolokia/jolokia-jvm/{{= fp.version.jolokia }}/jolokia-jvm-${fp.version.jolokia}-agent.jar \
+         -o /opt/jolokia/jolokia.jar \
+ && chmod 444 /opt/jolokia/jolokia.jar \
+ && chmod 755 {{= destPath}}
+EXPOSE 8778
+{{? fp.blockOpts.openshift }}LABEL io.openshift.expose-services 8778/tcp:jolokia{{?}}

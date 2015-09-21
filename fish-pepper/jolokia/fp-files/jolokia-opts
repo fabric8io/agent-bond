@@ -1,0 +1,46 @@
+#!/bin/sh
+
+dir=${AB_JOLOKIA_DIR:-/opt/jolokia}
+
+if [ -z ${AB_JOLOKIA_OFF+x} ]; then
+   opts="-javaagent:$dir/jolokia.jar"
+   config=${AB_JOLOKIA_CONFIG:-$dir/jolokia.properties}
+   if [ -f "$config" ]; then
+      # Configuration takes precedence
+      opts="${opts}${sep}${config}"
+      sep=","
+      grep -q -e '^host' ${config} && host_in_config=1
+   fi
+   if [ -z ${AB_JOLOKIA_HOST+x} ] && [ -z ${host_in_config+x} ]; then
+      AB_JOLOKIA_HOST='0.0.0.0'
+   fi
+   if [ -n "$AB_JOLOKIA_HOST" ]; then
+      opts="${opts}${sep}host=${AB_JOLOKIA_HOST}"
+      sep=","
+   fi
+   if [ -n "$AB_JOLOKIA_PORT" ]; then
+      opts="${opts}${sep}port=${AB_JOLOKIA_PORT}"
+      sep=","
+   fi
+   if [ -n "$AB_JOLOKIA_USER" ]; then
+      opts="${opts}${sep}user=${AB_JOLOKIA_USER}"
+      sep=","
+   fi
+   if [ -n "$AB_JOLOKIA_PASSWORD" ]; then
+      opts="${opts}${sep}password=${AB_JOLOKIA_PASSWORD}"
+      sep=","
+   fi
+   # Integration of 3rd party environments
+   if [ -n "$AB_JOLOKIA_AUTH_OPENSHIFT" ]; then
+      opts="${opts}${sep}authMode=delegate,authUrl=${AB_JOLOKIA_AUTH_OPENSHIFT%/}/users/~,authPrincipalSpec=json:metadata/user,authIgnoreCerts=true,authFallbackHeader=X-Authorization"
+      sep=","
+   fi
+   # Add extra opts to the end
+   if [ -n "$AB_JOLOKIA_OPTS" ]; then
+      opts="${opts}${sep}${AB_JOLOKIA_OPTS}"
+      sep=","
+   fi
+   if [ "x$sep" != 'x=' ] ; then
+     echo ${opts}
+   fi
+fi

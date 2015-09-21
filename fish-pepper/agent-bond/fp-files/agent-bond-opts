@@ -27,9 +27,9 @@ fi
 if [ -z ${AB_OFF+x} ]; then
    opts="-javaagent:$dir/agent-bond.jar"
    config=${AB_CONFIG:-$dir/agent-bond.properties}
-   if [ -f "$AB_CONFIG" ]; then
+   if [ -f "$config" ]; then
       # Configuration takes precedence
-      opts="${opts}${sep}${AB_CONFIG}"
+      opts="${opts}${sep}${config}"
       sep=","
    fi
    if [ -z ${AB_ENABLED+x} ] || [ x${AB_ENABLED} != x${AB_ENABLED/jolokia/} ]; then
@@ -53,7 +53,7 @@ if [ -z ${AB_OFF+x} ]; then
         jsep=","
      fi
      if [ -n "$AB_JOLOKIA_USER" ]; then
-        jolokia_opt="${jolokia_opts}${jsep}user=${AB_JOLOKIA_USER}"
+        jolokia_opts="${jolokia_opts}${jsep}user=${AB_JOLOKIA_USER}"
         jsep=","
      fi
      if [ -n "$AB_JOLOKIA_PASSWORD" ]; then
