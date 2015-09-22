@@ -9,4 +9,3 @@ RUN mkdir -p /opt/jolokia \
  && chmod 444 /opt/jolokia/jolokia.jar \
  && chmod 755 {{= destPath}}
 EXPOSE 8778
-{{? fp.blockOpts.openshift }}LABEL io.openshift.expose-services 8778/tcp:jolokia{{?}}
