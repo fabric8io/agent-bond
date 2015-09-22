@@ -1,3 +1,7 @@
+## Agent-Bond Options
+
+Agent bond itself can be influenced with the following environment variables: 
+
 * **AB_OFF** : If set disables activation of agent-bond (i.e. echos an empty value). By default, agent-bond is enabled.
 * **AB_ENABLED** : Comma separated list of sub-agents enabled. Currently allowed values are `jolokia` and `jmx_exporter`. 
   By default both are enabled.
