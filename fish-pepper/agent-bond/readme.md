@@ -1,4 +1,4 @@
-## Agent-Bond Options
+### Agent-Bond Options
 
 Agent bond itself can be influenced with the following environment variables: 
 
