@@ -17,7 +17,7 @@
 package io.fabric8.bond.jmx_exporter;
 
 import io.fabric8.bond.core.AgentDescriptor;
-import io.prometheus.jmx.JavaAgent;
+import io.prometheus.jmx.shaded.io.prometheus.jmx.JavaAgent;
 
 /**
  * @author roland

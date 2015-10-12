@@ -31,10 +31,20 @@ if [ -z ${AB_JOLOKIA_OFF+x} ]; then
       opts="${opts}${sep}password=${AB_JOLOKIA_PASSWORD}"
       sep=","
    fi
-   # Integration of 3rd party environments
+   # Integration with OpenShift client cert auth
    if [ -n "$AB_JOLOKIA_AUTH_OPENSHIFT" ]; then
-      opts="${opts}${sep}authMode=delegate,authUrl=${AB_JOLOKIA_AUTH_OPENSHIFT%/}/users/~,authPrincipalSpec=json:metadata/user,authIgnoreCerts=true,authFallbackHeader=X-Authorization"
-      sep=","
+      ca_cert="/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+      if [ -n "${AB_JOLOKIA_CA_CERT}" ]; then
+         ca_cert="${AB_JOLOKIA_CA_CERT}"
+      fi
+      principal="cn=OpenShift API Proxy"   # TODO: Set this to a sensible default value
+      if [  x"${AB_JOLOKIA_AUTH_OPENSHIFT}" != x"${AB_JOLOKIA_AUTH_OPENSHIFT/=/}" ]; then
+         # Supposed to contain a principal name to check
+         principal="${AB_JOLOKIA_AUTH_OPENSHIFT}"
+      fi
+      auth_opts="protocol=https,useSslClientAuthentication=true,extraClientCheck=true,caCert=${ca_cert},clientPrincipal=${principal}"
+      jolokia_opts="${jolokia_opts}${jsep}${auth_opts}"
+      jsep=","
    fi
    # Add extra opts to the end
    if [ -n "$AB_JOLOKIA_OPTS" ]; then

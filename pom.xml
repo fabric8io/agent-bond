@@ -26,13 +26,13 @@
 
   <groupId>io.fabric8</groupId>
   <artifactId>agent-bond</artifactId>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>0.1.2-SNAPSHOT</version>
 
   <url>http://github.com/fabric8io/agent-bond</url>
 
   <properties>
-    <version.jolokia>1.3.2-SNAPSHOT</version.jolokia>
-    <version.jmx_exporter>0.3-SNAPSHOT</version.jmx_exporter>
+    <version.jolokia>1.3.2</version.jolokia>
+    <version.jmx_exporter>0.4</version.jmx_exporter>
   </properties>
 
   <modules>
