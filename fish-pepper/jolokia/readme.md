@@ -8,12 +8,16 @@
 * **AB_JOLOKIA_PORT** : Port to use (Default: `8778`)
 * **AB_JOLOKIA_USER** : User for authentication. By default authentication is switched off.
 * **AB_JOLOKIA_PASSWORD** : Password for authentication. By default authentication is switched off.
+* **AB_JOLOKIA_HTTPS** : Switch on secure communication with https. By default self signed server certificates are generated
+  if no `serverCert` configuration is given in `AB_JOLOKIA_OPTS`
 * **AB_JOLOKIA_ID** : Agent ID to use (`$HOSTNAME` by default, which is the container id)
 * **AB_JOLOKIA_OPTS**  : Additional options to be appended to the agent opts. They should be given in the format 
   "key=value,key=value,..."
 
-Some options for integration in various environments
+Some options for integration in various environments:
 
-* **AB_JOLOKIA_AUTH_OPENSHIFT** : Switch on OAuth2 authentication for OpenShift. The value of this parameter must be the OpenShift API's 
-  base URL (e.g. `https://localhost:8443/osapi/v1/`)
+* **AB_JOLOKIA_AUTH_OPENSHIFT** : Switch on client authentication for OpenShift TSL communication. The value of this 
+  parameter can be a relative distinguished name which must be contained in a presented client certificate. Enabling this
+  parameter will automatically switch Jolokia into https communication mode. The default CA cert is set to 
+  `/var/run/secrets/kubernetes.io/serviceaccount/ca.crt` 
 
