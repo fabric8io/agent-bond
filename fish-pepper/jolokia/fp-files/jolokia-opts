@@ -18,7 +18,7 @@ if [ -z ${AB_JOLOKIA_OFF+x} ]; then
    config=${AB_JOLOKIA_CONFIG:-$dir/jolokia.properties}
    if [ -f "$config" ]; then
       # Configuration takes precedence
-      opts="${opts}${sep}${config}"
+      opts="${opts}${sep}config=${config}"
       sep=","
       grep -q -e '^host' ${config} && host_in_config=1
    fi
@@ -42,7 +42,7 @@ if [ -z ${AB_JOLOKIA_OFF+x} ]; then
       sep=","
    fi
    if [ -n "$AB_JOLOKIA_HTTPS" ]; then
-      opts="${opts}${jsep}protocol=https"
+      opts="${opts}${sep}protocol=https"
       use_https=1
       sep=","
    fi
@@ -58,10 +58,9 @@ if [ -z ${AB_JOLOKIA_OFF+x} ]; then
       if [ $(is_in_jolokia_opts "clientPrincipal") != "yes" ]; then
          if [  x"${AB_JOLOKIA_AUTH_OPENSHIFT}" != x"${AB_JOLOKIA_AUTH_OPENSHIFT/=/}" ]; then
             # Supposed to contain a principal name to check
-            auth_opts="${auth_opts},clientPrincipal=${AB_JOLOKIA_AUTH_OPENSHIFT}"
+            auth_opts="${auth_opts},clientPrincipal=`echo ${AB_JOLOKIA_AUTH_OPENSHIFT} | sed -e 's/ /\\\\ /g'`"
          else
-            # TODO: Set this to a sensible default value
-            auth_opts="${auth_opts},clientPrincipal=cn=OpenShift API Proxy"
+            auth_opts="${auth_opts},clientPrincipal=cn=system:master-proxy"
          fi
       fi
       opts="${opts}${sep}${auth_opts}"

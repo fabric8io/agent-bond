@@ -39,7 +39,7 @@ if [ -z ${AB_OFF+x} ]; then
    config=${AB_CONFIG:-$dir/agent-bond.properties}
    if [ -f "$config" ]; then
       # Configuration takes precedence
-      opts="${opts}${sep}${config}"
+      opts="${opts}${sep}config=${config}"
       sep=","
    fi
    if [ -z ${AB_ENABLED+x} ] || [ x"${AB_ENABLED}" != x"${AB_ENABLED/jolokia/}" ]; then
@@ -87,10 +87,9 @@ if [ -z ${AB_OFF+x} ]; then
         if [ $(is_in_jolokia_opts "clientPrincipal") != "yes" ]; then
            if [  x"${AB_JOLOKIA_AUTH_OPENSHIFT}" != x"${AB_JOLOKIA_AUTH_OPENSHIFT/=/}" ]; then
               # Supposed to contain a principal name to check
-              auth_opts="${auth_opts},clientPrincipal=${AB_JOLOKIA_AUTH_OPENSHIFT}"
+              auth_opts="${auth_opts},clientPrincipal=`echo ${AB_JOLOKIA_AUTH_OPENSHIFT} | sed -e 's/ /\\\\ /g'`"
            else
-              # TODO: Set this to a sensible default value
-              auth_opts="${auth_opts},clientPrincipal=cn=OpenShift API Proxy"
+              auth_opts="${auth_opts},clientPrincipal=cn=system:master-proxy"
            fi
         fi
         jolokia_opts="${jolokia_opts}${jsep}${auth_opts}"
