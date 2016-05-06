@@ -38,7 +38,7 @@
 
     <dependency>
       <groupId>org.jolokia</groupId>
-      <artifactId>jolokia-jvm</artifactId>
+      <artifactId>jolokia-agent-jvm</artifactId>
       <version>${version.jolokia}</version>
       <classifier>agent</classifier>
     </dependency>
@@ -58,7 +58,7 @@
             <configuration>
               <artifactSet>
                 <includes>
-                  <include>org.jolokia:jolokia-jvm:agent</include>
+                  <include>org.jolokia:jolokia-agent-jvm:agent</include>
                   <include>io.fabric8:agent-bond-jolokia</include>
                 </includes>
               </artifactSet>
