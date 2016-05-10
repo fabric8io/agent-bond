@@ -22,12 +22,12 @@
   <parent>
     <artifactId>agent-bond</artifactId>
     <groupId>io.fabric8</groupId>
-    <version>0.1.3-SNAPSHOT</version>
+    <version>0.1.3</version>
     <relativePath>..</relativePath>
   </parent>
 
   <artifactId>agent-bond-agent</artifactId>
-  <version>0.1.3-SNAPSHOT</version>
+  <version>0.1.3</version>
   <packaging>jar</packaging>
 
   <properties>
