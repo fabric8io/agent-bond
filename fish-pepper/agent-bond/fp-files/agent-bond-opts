@@ -112,7 +112,7 @@ if [ -z ${AB_OFF+x} ]; then
         sep=","
      else
         port=${AB_JMX_EXPORTER_PORT-9779}
-        config=${AB_JMX_EXPORTER_CONFIG-/opt/agent-bond/jmx_exporter_config.json}
+        config=${AB_JMX_EXPORTER_CONFIG-/opt/agent-bond/jmx_exporter_config.yml}
         opts="${opts}${sep}jmx_exporter${ab_open_del}${port}:${config}${ab_close_del}"
         sep=","
      fi
