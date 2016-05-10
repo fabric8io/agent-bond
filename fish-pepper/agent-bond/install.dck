@@ -8,5 +8,5 @@ RUN mkdir -p /opt/agent-bond \
           -o /opt/agent-bond/agent-bond.jar \
  && chmod 444 /opt/agent-bond/agent-bond.jar \
  && chmod 755 {{= destPath}}
-ADD jmx_exporter_config.json /opt/agent-bond/
+ADD jmx_exporter_config.yml /opt/agent-bond/
 EXPOSE 8778 9779
