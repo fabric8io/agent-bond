@@ -26,7 +26,7 @@
 
   <groupId>io.fabric8</groupId>
   <artifactId>agent-bond</artifactId>
-  <version>0.1.4-SNAPSHOT</version>
+  <version>0.1.4</version>
 
   <url>http://github.com/fabric8io/agent-bond</url>
 
