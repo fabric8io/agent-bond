@@ -1,6 +1,6 @@
 {{
   var destPath = fp.blockOpts.dest || "/bin/agent-bond-options";
-  var agentBondVersion = fp.version.agentBond || "0.1.4";
+  var agentBondVersion = fp.version.agentBond || fp.blockOpts.version || "0.1.4";
 }}# Agent bond including Jolokia and jmx_exporter
 ADD agent-bond-opts {{= destPath }}
 RUN mkdir -p /opt/agent-bond \
