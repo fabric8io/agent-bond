@@ -10,8 +10,8 @@ Agent bond itself can be influenced with the following environment variables:
 #### Jolokia configuration
 
 * **AB_JOLOKIA_CONFIG** : If set uses this file (including path) as Jolokia JVM agent properties (as described 
-  in Jolokia's [reference manual](http://www.jolokia.org/reference/html/agents.html#agents-jvm)). 
-  By default this is `/opt/jolokia/jolokia.properties`. 
+  in Jolokia's [reference manual](http://www.jolokia.org/reference/html/agents.html#agents-jvm)).
+  By default this is `/opt/jolokia/jolokia.properties`.
 * **AB_JOLOKIA_HOST** : Host address to bind to (Default: `0.0.0.0`)
 * **AB_JOLOKIA_PORT** : Port to use (Default: `8778`)
 * **AB_JOLOKIA_USER** : User for authentication. By default authentication is switched off.
@@ -29,7 +29,7 @@ Some options for integration in various environments:
   parameter will automatically switch Jolokia into https communication mode. The default CA cert is set to 
   `/var/run/secrets/kubernetes.io/serviceaccount/ca.crt` 
   
-#### jmx_exporter configuration 
+#### jmx_exporter configuration
 
 * **AB_JMX_EXPORTER_OPTS** : Configuration to use for `jmx_exporter` (in the format `<port>:<path to config>`)
 * **AB_JMX_EXPORTER_PORT** : Port to use for the JMX Exporter. Default: `9779`
