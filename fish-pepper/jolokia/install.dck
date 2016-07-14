@@ -1,8 +1,7 @@
 {{
   var destPath = fp.blockOpts.dest || "/bin/jolokia-options";
-  var jolokiaVersion =  fp.blockOpts.version || \
-                        (fp.version && fp.version.jolokia) || \
-                        "1.3.3";
+  var globalVersions = fp.version || {};
+  var jolokiaVersion =  fp.blockOpts.version || globalVersions.jolokia || "1.3.3";
   var jolokiaArtifact = jolokiaVersion.mach(/^2.*$/) ? "jolokia-agent-jvm" : "jolokia-jvm";
   var mavenRepo = fp.blockOpts.mavenRepo || "http://central.maven.org/maven2";
 }}# Jolokia agent
