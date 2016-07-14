@@ -7,8 +7,9 @@
 }}# Jolokia agent
 RUN mkdir -p /opt/jolokia \
  && curl {{= mavenRepo }}/org/jolokia/{{= jolokiaArtifact }}/{{= jolokiaVersion }}/{{= jolokiaArtifact }}-{{= jolokiaVersion }}-agent.jar \
-         -o /opt/jolokia/jolokia.jar \
- && chmod 444 /opt/jolokia/jolokia.jar \
- && chmod 755 {{= destPath}}
+         -o /opt/jolokia/jolokia.jar
 ADD jolokia-opts {{= destPath }}
+RUN chmod 444 /opt/jolokia/jolokia.jar \
+ && chmod 755 {{= destPath}}
+
 EXPOSE 8778
