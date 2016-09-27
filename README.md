@@ -49,7 +49,7 @@ An agent is only enabled when it is mentioned in the configuration, even with an
 
 ### Docker Base Image
  
-There is also a Docker base image available: [fabric8/java-agent-bond](https://registry.hub.docker.com/u/fabric8/java-agent-bond/)
+There is also a Docker base image available: [fabric8/java-alpine-openjdk8-jre](https://hub.docker.com/r/fabric8/java-alpine-openjdk8-jre/)
 
 You can use this to easily enable `Jolokia` and/or `jmx_exporter` for your Java applications. Some sample usage for 
 [Tomcat](docker/tomcat) and [Wildfly](docker/wildfly) are included.
