@@ -5,11 +5,13 @@
   var jolokiaArtifact = jolokiaVersion.match(/^2.*$/) ? "jolokia-agent-jvm" : "jolokia-jvm";
   var mavenRepo = fp.blockOpts.mavenRepo || "http://central.maven.org/maven2";
 }}# Jolokia agent
-RUN mkdir -p /opt/jolokia \
+RUN mkdir -p /opt/jolokia/etc \
  && curl {{= mavenRepo }}/org/jolokia/{{= jolokiaArtifact }}/{{= jolokiaVersion }}/{{= jolokiaArtifact }}-{{= jolokiaVersion }}-agent.jar \
          -o /opt/jolokia/jolokia.jar
 ADD jolokia-opts {{= destPath }}
 RUN chmod 444 /opt/jolokia/jolokia.jar \
- && chmod 755 {{= destPath}}
+ && chmod 755 {{= destPath}} \ 
+ && chmod 775 /opt/jolokia/etc \
+ && chgrp root /opt/jolokia/etc
 
 EXPOSE 8778
