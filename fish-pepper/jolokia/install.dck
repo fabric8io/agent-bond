@@ -4,7 +4,6 @@
   var jolokiaVersion =  fp.blockOpts.version || globalVersions.jolokia || "1.3.5";
   var jolokiaArtifact = jolokiaVersion.match(/^2.*$/) ? "jolokia-agent-jvm" : "jolokia-jvm";
   var mavenRepo = fp.blockOpts.mavenRepo || "http://central.maven.org/maven2";
-  // Set userGroupMode to a valid unix group to make /opt/jolokia/etc group writable and owned by this group
   var userGroupMode = fp.blockOpts.userGroupMode;
 }}# Jolokia agent
 RUN mkdir -p /opt/jolokia/etc \
