@@ -9,10 +9,11 @@
 * **AB_JOLOKIA_PORT** : Port to use (Default: `8778`)
 * **AB_JOLOKIA_USER** : User for basic authentication. Defaults to 'jolokia'
 * **AB_JOLOKIA_PASSWORD** : Password for basic authentication. By default authentication is switched off.
-* **AB_JOLOKIA_PASSWORD_RANDOM** : Should a random AB_JOLOKIA_PASSWORD be generated? Generated value will be written to /opt/jolokia/etc/jolokia.pw
+* **AB_JOLOKIA_PASSWORD_RANDOM** : Should a random AB_JOLOKIA_PASSWORD be generated? Generated value will be written to `/opt/jolokia/etc/jolokia.pw`
 * **AB_JOLOKIA_HTTPS** : Switch on secure communication with https. By default self signed server certificates are generated
   if no `serverCert` configuration is given in `AB_JOLOKIA_OPTS`
 * **AB_JOLOKIA_ID** : Agent ID to use (`$HOSTNAME` by default, which is the container id)
+* **AB_JOLOKIA_DISCOVERY_ENABLED** : Enable Jolokia discovery.  Defaults to false.
 * **AB_JOLOKIA_OPTS**  : Additional options to be appended to the agent configuration. They should be given in the format 
   "key=value,key=value,..."
 

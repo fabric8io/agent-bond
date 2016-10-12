@@ -14,7 +14,7 @@ get_jolokia_properties() {
 
   echo "host=${AB_JOLOKIA_HOST:-*}"
   echo "port=${AB_JOLOKIA_PORT:-8778}"
-  echo "discoveryEnabled=false"
+  echo "discoveryEnabled=${AB_JOLOKIA_DISCOVERY_ENABLED:=false}"
 
   if [ -n "$AB_JOLOKIA_PASSWORD" ]; then
      echo "user=${AB_JOLOKIA_USER:-jolokia}"
@@ -56,7 +56,7 @@ get_jolokia_properties() {
 }
 
 write_jolokia_properties() {  
-  jolokia_property_file="$1"
+  local jolokia_property_file="$1"
 
   # Setup Jolokia to accept basic auth, using a randomly generated password that is stored
   # in the container in the ${DEPLOYMENTS_DIR}/jolokia.pw file.
@@ -67,7 +67,7 @@ write_jolokia_properties() {
     else
       AB_JOLOKIA_PASSWORD=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
       touch "${pw_file}"
-      chmod 600 "${pw_file}"    
+      chmod 660 "${pw_file}"
       cat > "${pw_file}" <<EOF
 $AB_JOLOKIA_PASSWORD
 EOF
@@ -76,7 +76,7 @@ EOF
   fi
 
   touch "${jolokia_property_file}"
-  chmod 600 "${jolokia_property_file}"
+  chmod 660 "${jolokia_property_file}"
   cat > "${jolokia_property_file}" <<EOF
 $(get_jolokia_properties)  
 EOF
@@ -84,7 +84,7 @@ EOF
 }
 
 if [ -z ${AB_JOLOKIA_OFF+x} ]; then
-  if [ "$AB_JOLOKIA_CONFIG"=="" ]; then
+  if [ -z "${AB_JOLOKIA_CONFIG}" ]; then
     AB_JOLOKIA_CONFIG="/opt/jolokia/etc/jolokia.properties"
     write_jolokia_properties "$AB_JOLOKIA_CONFIG"
   fi
