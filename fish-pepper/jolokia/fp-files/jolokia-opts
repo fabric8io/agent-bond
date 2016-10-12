@@ -48,14 +48,14 @@ get_jolokia_properties() {
      fi
   fi
 
-  # Add extra opts 
+  # Add extra opts
   if [ -n "${AB_JOLOKIA_OPTS}" ]; then
      echo "${AB_JOLOKIA_OPTS}" | tr "," "\n"
-  fi  
+  fi
 
 }
 
-write_jolokia_properties() {  
+write_jolokia_properties() {
   local jolokia_property_file="$1"
 
   # Setup Jolokia to accept basic auth, using a randomly generated password that is stored
@@ -78,12 +78,12 @@ EOF
   touch "${jolokia_property_file}"
   chmod 660 "${jolokia_property_file}"
   cat > "${jolokia_property_file}" <<EOF
-$(get_jolokia_properties)  
+$(get_jolokia_properties)
 EOF
 
 }
 
-if [ -z ${AB_JOLOKIA_OFF+x} ]; then
+if [ -z "${AB_JOLOKIA_OFF+x}" ]; then
   if [ -z "${AB_JOLOKIA_CONFIG}" ]; then
     AB_JOLOKIA_CONFIG="/opt/jolokia/etc/jolokia.properties"
     write_jolokia_properties "$AB_JOLOKIA_CONFIG"
