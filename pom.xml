@@ -32,7 +32,7 @@
 
   <properties>
     <version.jolokia>2.0.0-M2</version.jolokia>
-    <version.jmx_exporter>0.6</version.jmx_exporter>
+    <version.jmx_exporter>0.9</version.jmx_exporter>
   </properties>
 
   <modules>
