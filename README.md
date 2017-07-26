@@ -15,7 +15,7 @@ The following agents are currently supported:
 ### Usage
 
 ```
-java -javaagent=agent-bond.jar=jolokia{{port=8778}},jmx_exporter{{9779:config.json}}
+java -javaagent:agent-bond.jar=jolokia{{port=8778}},jmx_exporter{{9779:config.json}}
 ```
 
 The argument passed to the agent has the general format: 
