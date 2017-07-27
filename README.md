@@ -15,7 +15,7 @@ The following agents are currently supported:
 ### Usage
 
 ```
-java -javaagent=agent-bond.jar=jolokia{{port=8778}},jmx_exporter{{9779:config.json}}
+java -javaagent=agent-bond.jar=jolokia{{port=8778}},jmx_exporter{{9779:config.yml}}
 ```
 
 The argument passed to the agent has the general format: 
@@ -30,7 +30,7 @@ Only agents referenced are enabled. The possible agent types are:
   [reference manual](https://jolokia.org/reference/html/agents.html#jvm-agent). 
   The configuration for Jolokia can be omitted, it will take then the default values
 * **jmx_exporter** : Options for [jmx_exporter](https://github.com/prometheus/jmx_exporter) which are mandatory. 
-  You need the port and the path to the configuration file like in `jmx_exporter{{9779:config.yaml}}` 
+  You need the port and the path to the configuration file like in `jmx_exporter{{9779:config.yml}}` 
  
 Alternatively instead of providing the configuration on the command line you can also specify the path to 
 a property file like in `-javaagent:agent-bond.jar=agent.properties` where the properties hold the configuration
@@ -38,7 +38,7 @@ line by line:
 
 ```
 jolokia=port=8778,host=0.0.0.0
-jmx_exporter=9779:config.yaml
+jmx_exporter=9779:config.yml
 ```
 
 If both, a property file and specific agent configuration is provided on the command line, then the configuration 
