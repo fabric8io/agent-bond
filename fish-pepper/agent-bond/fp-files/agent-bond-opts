@@ -29,7 +29,7 @@ sep="="
 # Options separators defined to avoid clash with fish-pepper templating
 ab_open_del="{""{"
 ab_close_del="}""}"
-if [ -n ${escape_sep:-} ]; then
+if [ -n "${escape_sep:-}" ]; then
   ab_open_del='\{\{'
   ab_close_del='\}\}'
 fi
