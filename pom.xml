@@ -33,8 +33,8 @@
   <url>http://github.com/fabric8io/agent-bond</url>
 
   <properties>
-    <version.jolokia>1.3.7</version.jolokia>
-    <version.jmx_exporter>0.1.0</version.jmx_exporter>
+    <version.jolokia>1.4.0</version.jolokia>
+    <version.jmx_exporter>0.2.0</version.jmx_exporter>
     <autoReleaseAfterClose>true</autoReleaseAfterClose>
   </properties>
 
